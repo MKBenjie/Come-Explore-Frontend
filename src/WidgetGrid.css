@@ -1,0 +1,522 @@
+/* Base Design Tokens & Theme Variables */
+:root {
+  --font-sans: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Light Theme Colors (Default) */
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-intro: #f1f5f9;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --border-card-header: #f1f5f9;
+  --accent: #95c809;
+  --accent-btn: #2563eb;
+  --accent-btn-hover: #1d4ed8;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-app: #0f172a;
+  --bg-card: #1e293b;
+  --bg-input: #0f172a;
+  --bg-intro: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --border-card-header: #334155;
+  --accent-btn: #3b82f6;
+  --accent-btn-hover: #2563eb;
+  --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.wg-root {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-main);
+  background: var(--bg-app);
+  padding: 1rem;
+  border-radius: 12px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Header & Theme Toggle Bar */
+.wg-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.wg-header-bar h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-main);
+}
+
+.wg-theme-btn {
+  background: var(--bg-card);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.wg-theme-btn:hover {
+  border-color: var(--text-muted);
+}
+
+/* Grid Layout */
+.wg-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* minmax(0, 1fr) prevents grid blowout on mobile */
+  gap: 16px;
+  align-items: start;
+}
+
+.wg-item {
+  min-width: 0; /* Critical for wrapping text/tables within CSS grid items */
+}
+
+.wg-item.item-full { grid-column: 1 / -1; }
+.wg-item.item-half { grid-column: span 1; }
+
+/* Card Component */
+.wg-card {
+  background: var(--bg-card);
+  border-radius: 8px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 64px;
+}
+
+.wg-card-header {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-card-header);
+  height: 48px;
+}
+
+.wg-card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.wg-title-text {
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.wg-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wg-action {
+  background: transparent;
+  border: none;
+  color: var(--text-main);
+  padding: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.wg-action:hover {
+  background: rgba(150, 150, 150, 0.15);
+}
+
+.wg-card-content {
+  padding: 0.75rem;
+  height: 100%;
+  color: var(--text-main);
+}
+
+/* Outputs & Scroll Containers */
+.wg-scroll {
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 4px;
+  text-align: left;
+}
+
+/* Center only when empty */
+.wg-scroll.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  text-align: center;
+}
+
+/* Expanded Card Size for Results */
+.output-large .wg-card {
+  min-height: 350px;
+}
+
+.output-large .wg-scroll {
+  max-height: 650px;
+  min-height: 280px;
+}
+
+/* Markdown / Output Typography Formatting */
+.wg-output-content {
+  text-align: left;
+  line-height: 1.6;
+  color: var(--text-main);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.wg-output-content h1,
+.wg-output-content h2,
+.wg-output-content h3,
+.wg-output-content h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.wg-output-content p {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+}
+
+.wg-output-content ul,
+.wg-output-content ol {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  padding-left: 1.25rem;
+}
+
+.wg-output-content li {
+  margin-bottom: 0.25rem;
+}
+
+.wg-output-content strong {
+  font-weight: 600;
+}
+
+/* Dynamic Theme Inputs */
+.wg-input-row textarea,
+.wg-card-content textarea {
+  width: 100%;
+  min-height: 90px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  padding: 10px;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.wg-select select {
+  width: 100%;
+  height: 40px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  box-sizing: border-box;
+}
+
+.wg-slider-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.wg-slider-row input[type=range] {
+  flex: 1;
+  accent-color: var(--accent-btn);
+}
+
+.wg-number {
+  width: 70px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-input);
+  color: var(--text-main);
+}
+
+/* Loading Spinner Utility */
+.wg-loading-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem 0;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.wg-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid var(--border-color);
+  border-top-color: var(--accent-btn);
+  border-radius: 50%;
+  animation: wg-spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+.wg-btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: wg-spin 0.8s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+@keyframes wg-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Banner & Buttons */
+.wg-intro-card {
+  background: var(--bg-intro);
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.wg-action-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  margin: 0.75rem 0 1rem;
+}
+
+.wg-btn-primary {
+  background-color: var(--accent-btn);
+  color: #ffffff;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+}
+
+.wg-btn-primary:disabled {
+  background-color: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.wg-btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-btn-hover);
+}
+
+.wg-status-text {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Utilities */
+.muted { color: var(--text-muted); }
+.wg-link { background: none; border: 0; color: var(--accent); text-decoration: underline; cursor: pointer; padding: 0; font: inherit; }
+.visually-hidden { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+/* Mobile Layout Fixes */
+@media (max-width: 640px) {
+  .wg-root {
+    padding: 0.75rem;
+  }
+
+  .wg-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .wg-item.item-half, 
+  .wg-item.item-full { 
+    grid-column: 1 / -1; 
+  }
+
+  .wg-action-row {
+    align-items: stretch; /* Full-width button on mobile */
+  }
+
+  .wg-btn-primary {
+    width: 100%;
+  }
+
+  .output-large .wg-card {
+    min-height: auto; /* Allow natural sizing on mobile */
+  }
+
+  .output-large .wg-scroll {
+    max-height: 450px;
+    min-height: 180px;
+  }
+}
+
+/* Markdown Table Styles */
+.wg-output-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  text-align: left;
+  display: block;
+  overflow-x: auto; /* Allows horizontal scrolling for wide tables without breaking grid layout */
+  white-space: nowrap;
+}
+
+.wg-output-content th,
+.wg-output-content td {
+  padding: 8px 10px;
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.wg-output-content th {
+  background-color: var(--bg-intro);
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.wg-output-content tr:nth-child(even) {
+  background-color: rgba(150, 150, 150, 0.04);
+}
+
+/* Printable Styles for html2pdf rendering */
+@media print {
+  .wg-scroll {
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+  
+  .wg-card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* Action Button Styling (Copy / Export) */
+.wg-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  /* Default Light Mode palette */
+  background-color: #f8fafc;
+  color: #334155;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.wg-action-btn:hover:not(:disabled) {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+.wg-action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Copied Feedback State */
+.wg-action-btn.copied {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border-color: #86efac;
+}
+
+/* Icon Sizing */
+.wg-action-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* Dark Mode Overrides (Assumes data-theme="dark" on root or parent) */
+[data-theme='dark'] .wg-action-btn {
+  background-color: #1e293b;
+  color: #cbd5e1;
+  border-color: #334155;
+}
+
+[data-theme='dark'] .wg-action-btn:hover:not(:disabled) {
+  background-color: #334155;
+  border-color: #475569;
+  color: #f8fafc;
+}
+
+[data-theme='dark'] .wg-action-btn.copied {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border-color: #22c55e;
+}
+
+/* PDF Print Mode Styles */
+.pdf-export-mode .wg-scroll {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.pdf-export-mode .wg-item {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 20px;
+}
+
+/* Ensure background colors and text contrast render accurately in html2canvas */
+.pdf-export-mode {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
