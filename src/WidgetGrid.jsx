@@ -26,13 +26,13 @@ export default function WidgetGrid() {
       setLastPayload(formDataPayload);
       setLocationStatus('Detecting your current location...');
       // 1. Enforce location before triggering the SSE stream
-      // const userLocation = await requireCoordinates();
-      let userLocation = null;
-      try {
-        userLocation = await requireCoordinates();
-      } catch (geoErr) {
-        console.warn('Proceeding without high-accuracy location:', geoErr);
-      }
+      const userLocation = await requireCoordinates();
+      // let userLocation = null;
+      // try {
+      //   userLocation = await requireCoordinates();
+      // } catch (geoErr) {
+      //   console.warn('Proceeding without high-accuracy location:', geoErr);
+      // }
 
       // 2. Attach location override to backend payload
       // const finalPayload = {
@@ -45,7 +45,7 @@ export default function WidgetGrid() {
       // 3. Initiate SSE connection
       await startStream(formDataPayload, userLocation);
     } catch (err) {
-      console.error('Failed to generate itinerary:', err);
+      console.warn('Generation stopped due to location requirement:', err);
     } finally {
       // ALWAYS clear location status regardless of success or failure
       setLocationStatus('');
