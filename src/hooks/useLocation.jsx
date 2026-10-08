@@ -25,7 +25,7 @@ export function useLocation() {
         (error) => {
           let errMessage = 'Location request failed.';
           if (error.code === error.PERMISSION_DENIED) {
-            errMessage = 'Location access is required to generate a personalized itinerary. Please enable location permissions in your browser.';
+            errMessage = 'Location access is required to generate a better personalized itinerary. Please enable location permissions in your browser.';
           } else if (error.code === error.POSITION_UNAVAILABLE) {
             errMessage = 'Unable to detect your location. Please check your device location settings.';
           } else {
