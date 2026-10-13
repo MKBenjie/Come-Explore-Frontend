@@ -220,6 +220,22 @@ export default function OutputSection({ sections, statuses, errors, onRetry, isG
                 </WidgetCard>
                 </div>
             </div>
+
+            {/* AI Disclaimer Notice */}
+            {/* {hasAnyContent && ( */}
+              <div
+                style={{
+                  textAlign: 'center',
+                  fontSize: '12px',
+                  color: 'var(--muted-color, #64748b)',
+                  padding: '8px 0',
+                  fontStyle: 'italic',
+                }}
+              >
+                AI-generated content may contain inaccuracies. Please verify important travel information before your trip.
+              </div>
+            {/* )} */}
+
         </div>
         </>
     );
